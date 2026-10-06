@@ -146,7 +146,7 @@ def test_search_invalid_gene(client: FlaskClient) -> None:
     html = response.data.decode()
 
     # Either error or empty result is acceptable
-    assert "error" in html.lower() or "Gene Information =" not in html
+    assert "error" in html.lower() or "Gene Information" not in html
 
 
 # ------------------------------------------------------------------

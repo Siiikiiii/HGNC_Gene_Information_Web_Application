@@ -86,4 +86,4 @@ LOGGING_CONFIG = {
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # Setup data file
-DATA_FILE = os.path.join(DATA_DIR, "hgnc_complete_set.txt")
+DATA_FILE = DATA_DIR / "hgnc_complete_set.txt"

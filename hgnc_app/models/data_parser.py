@@ -61,7 +61,7 @@ def parse_line(row: Dict[str, str]) -> Dict[str, Any]:
 
     Parameters
     ----------
-    line : dict
+    row : dict
         A dictionary representing a row from the input file, typically from csv.DictReader.
 
     Returns
@@ -88,7 +88,7 @@ def parse_line(row: Dict[str, str]) -> Dict[str, Any]:
     }
 
 
-def find_gene(query: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+def find_gene(query: str, data: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     """
     Find a gene query (HGNC-approved gene symbol or an HGNC ID) within a parsed hgnc dataset.
 
@@ -96,7 +96,7 @@ def find_gene(query: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     ----------
     query : str
         The search term (e.g., "BRCA2" or "HGNC:1101").
-    data : dict
+    data : list of dict
         Parsed dataset returned from `read_file`.
 
     Returns
