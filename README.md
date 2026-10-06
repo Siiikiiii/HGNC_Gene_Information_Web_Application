@@ -36,6 +36,7 @@ Unlike larger Flask projects, the application does not use a database or ORM. In
 
 The request flow is straightforward:
 
+```test
 Browser
     │
     ▼
@@ -52,7 +53,7 @@ Jinja Template (index.html)
     │
     ▼
 Browser
-
+```
 ---
 
 # Installation
