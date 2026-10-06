@@ -1,0 +1,9 @@
+name: hgnc_app
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python==3.12.8
+  - pip

@@ -1,0 +1,164 @@
+# =========================
+# Project metadata (PEP 621)
+# =========================
+[project]
+
+# The name of your package as it will appear on PyPI and in your installed packages
+name = "hgnc_app"
+
+# Fields that are NOT defined here but loaded dynamically elsewhere
+# In this case, dependencies are read from requirements.txt, and the code to do the reading from reuirements.txt
+# is found below
+dynamic = ["dependencies"]
+
+# Static version number (simple)
+# You manually update this as you release new versions
+# We can make versioning dynamic
+version = "0.0.1"
+
+# Short description of what your package does
+description = "HGNC Gene Information Web Application"
+
+# License file included in the project
+license = {file = "LICENSE.txt"}
+
+# Authors of the package
+authors = [{name = "Siqi Yin", email = "siqi.yin@nhs.net"}]
+
+# README file used as the long description (e.g. on PyPI)
+readme = "README.md"
+
+# Keywords to help people find your package
+keywords = [
+    "bioinformatics",
+    "HGNC",
+    "clinical genetics"
+]
+
+# Minimum Python version required to run this package
+requires-python = ">=3.10"
+
+# Classifiers help categorise your package on PyPI
+# These are mainly for discoverability and filtering
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    # NOTE: This should ideally match requires-python
+    "Programming Language :: Python :: 3.10"
+]
+
+# =====================================
+# Dynamic configuration (setuptools)
+# =====================================
+[tool.setuptools.dynamic]
+
+# Instead of listing dependencies here,
+# they are read from requirements.txt
+# This avoids duplication and keeps things DRY
+# You can add a manual list of dependencies, but we will use requirements.txt to keep things easy to maintain
+# and much simpler to have complete and utter control over our environment using pip freeze
+dependencies = {file = ["requirements.txt"]}
+
+# =====================================
+# Package discovery
+# =====================================
+[tool.setuptools.packages.find]
+
+# Where setuptools should look for Python packages
+# "." means the root directory
+where = ["."]
+
+# Only include packages that match this pattern
+include = ["hgnc_app*"]
+
+
+# ==========================================================
+# Package data (non-code assets required at runtime)
+# ==========================================================
+# The application depends on bundled static and template files
+# (HTML and CSS) required for correct operation of the Flask UI.
+#
+# These resources must be included in the installed package so that:
+#   - the application behaves identically across environments
+#   - deployment environments (including clinical/training systems)
+#     do not depend on external file paths or local filesystem layout
+#   - reproducibility is maintained across installations
+#
+# In this project, the application is distributed as a controlled,
+# self-contained system for healthcare training and interpretation.
+# Therefore, all runtime dependencies (code + templates + static assets)
+# are packaged together to avoid environment-dependent behaviour.
+#
+# NOTE:
+# Do not remove or externalise these resources unless deployment
+# infrastructure explicitly guarantees correct resolution.
+[tool.setuptools.package-data]
+hgnc_app = [
+    "templates/*",
+    "static/*"
+]
+
+# =====================================
+# Build system configuration
+# =====================================
+[build-system]
+
+# Build-time dependencies required to package your project
+# setuptools = build backend
+# wheel = allows building .whl files
+# setuptools_scm = only needed if using dynamic versioning
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "wheel"]
+
+# The tool used to build your package
+build-backend = "setuptools.build_meta"
+
+# ==========================================================
+# Development notes
+# ==========================================================
+#
+# Typical development workflow:
+#
+#     conda activate hgnc_app
+#
+#     pip install -e .
+#
+# The editable installation allows changes to the source code to be
+# reflected immediately without reinstalling the package.
+#
+# If requirements.txt is modified, rerun:
+#
+#     pip install -e .
+#
+# ----------------------------------------------------------
+# Useful development commands
+# ----------------------------------------------------------
+#
+# Run the Flask application:
+#
+#     python -m hgnc_app.app
+#
+# Execute the complete unit and UI test suite:
+#
+#     pytest
+#
+# Execute the complete test suite with coverage:
+#
+#     pytest \
+#         --cov=hgnc_app \
+#         --cov-report=term-missing:skip-covered \
+#         --cov-report=html \
+#         --cov-report=xml
+#
+# HTML coverage report:
+#
+#     htmlcov/index.html
+#
+# ----------------------------------------------------------
+# Dependencies
+# ----------------------------------------------------------
+#
+# All project dependencies, including testing libraries such as
+# pytest and pytest-cov, are maintained in requirements.txt. This
+# avoids duplication and ensures there is a single source of truth
+# for the project's software environment.

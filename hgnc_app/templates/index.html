@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGNC Gene Search</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background: rgb(252, 250, 250);">
+    <div class="container">
+        <h1 style="text-align:center">HGNC Gene Search</h1>
+        <form action="{{ url_for('search') }}" method="post"> 
+            <label for="gene">Enter Gene Symbol or HGNC ID:</label>
+            <input type="text" name="gene" placeholder="e.g. BRCA2 or HGNC:1101" required>
+            <br><br>
+            <button type="submit" class="btn btn-primary">Get gene data</button>
+        </form>
+        <br>
+        
+        {% if error_message %}
+            <p style="color: red;"><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <br>
+        
+        {% if gene_data %}
+            <h2>Gene Information</h2>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>HGNC gene symbol</td>
+                    <td>{{ gene_data.gene_symbol }}</td>
+                </tr>
+                <tr>
+                    <td>HGNC ID</td>
+                    <td>{{ gene_data.hgnc_id }}</td>
+                </tr>
+                <tr>
+                    <td>Gene name</td>
+                    <td>{{ gene_data.gene_name }}</td>
+                </tr>
+                <tr>
+                    <td>Previous gene symbols</td>
+                    <td>{{ gene_data.prev_symbol or 'None'}}</td>
+                </tr>
+                <tr>
+                    <td>Previous gene names</td>
+                    <td>{{ gene_data.prev_name or 'None' }}</td>
+                </tr>
+                <tr>
+                    <td>Gene aliases/synonyms</td>
+                    <td>{{ gene_data.alias_symbol or 'None' }}</td>
+                </tr>
+                <tr>
+                    <td>MANE Select transcript</td>
+                    <td>{{ gene_data.mane_select or 'None' }}</td>
+                </tr>
+                <!-- FIXED: Removed the extra stray </tr> tag that was here -->
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

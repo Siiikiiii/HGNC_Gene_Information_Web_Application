@@ -1,0 +1,5 @@
+
+git clone https://github.com/Siiikiiii/HGNC_Gene_Information_Web_Application.git
+mkdir data tests hgnc_app
+curl -o data/hgnc_complete_set.txt https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt
+
